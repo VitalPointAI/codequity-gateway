@@ -35,11 +35,13 @@ import { KEYPOM_OPTIONS } from '@/utils/keypom-options';
 
 export default function VmInitializer() {
   const [signedIn, setSignedIn] = useState(false);
+  console.log('signedin', signedIn)
   const [signedAccountId, setSignedAccountId] = useState(null);
   const [availableStorage, setAvailableStorage] = useState<Big | null>(null);
   const [walletModal, setWalletModal] = useState<WalletSelectorModal | null>(null);
   const ethersProviderContext = useEthersProviderContext();
   const { initNear } = useInitNear();
+  console.log('initnear', initNear)
   const near = useNear();
   const account = useAccount();
   const cache = useCache();
@@ -49,6 +51,7 @@ export default function VmInitializer() {
   const { requestAuthentication, saveCurrentUrl } = useSignInRedirect();
 
   useEffect(() => {
+    console.log('hereit')
     initNear &&
       initNear({
         networkId,
@@ -108,6 +111,8 @@ export default function VmInitializer() {
       setWalletModal(setupModal(selector, { contractId: near.config.contractName }));
     });
   }, [near]);
+
+  console.log('near', near)
 
   const requestSignInWithWallet = useCallback(() => {
     saveCurrentUrl();

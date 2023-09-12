@@ -11,13 +11,14 @@ import icon from '@/assets/images/near_social_icon.svg';
 const web3onboardKey = 'web3-onboard:connectedWallets';
 
 const wcV2InitOptions: any = {
-  version: 2,
-  projectId: '72b7b3359ab477e339a070f615806aa6',
+  walletConnectVersion: 2,
+  projectId: "7d502e44f5dafe080392aede7b0ca3dc",
   requiredChains: [1, 56],
 };
 
 const walletConnect = walletConnectModule(wcV2InitOptions);
-const ledger = ledgerModule();
+console.log('walletconnect', walletConnect)
+const ledger = ledgerModule()
 const injected = injectedModule();
 
 // initialize Onboard
@@ -98,6 +99,7 @@ export const useEthersProviderContext = singletonHook(defaultEthersProviderConte
 
   useEffect(() => {
     (async () => {
+      console.log('localStorage', localStorage)
       if (typeof localStorage === 'undefined') return;
 
       const walletsSub = onboard.state.select('wallets');
@@ -110,8 +112,9 @@ export const useEthersProviderContext = singletonHook(defaultEthersProviderConte
       });
 
       const previouslyConnectedWallets = JSON.parse(localStorage.getItem(web3onboardKey) || '[]');
-
+      console.log('previous wallets', previouslyConnectedWallets)
       if (previouslyConnectedWallets) {
+        console.log('previous wallets', previouslyConnectedWallets)
         // You can also auto connect "silently" and disable all onboard modals to avoid them flashing on page load
         await onboard.connectWallet({
           autoSelect: {

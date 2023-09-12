@@ -18,26 +18,28 @@ const VmInitializer = dynamic(() => import('../components/vm/VmInitializer'), {
   ssr: false,
 });
 
+console.log('vminit', VmInitializer)
+
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
+  console.log('component', Component)
+  console.log('pageprops', pageProps)
   useBosLoaderInitializer();
   useHashUrlBackwardsCompatibility();
 
   const getLayout = Component.getLayout ?? ((page) => page);
-
+  
   return (
     <>
       <Head>
-        <link rel="icon" href="favicon.ico" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <VmInitializer />
-
+     
       {getLayout(<Component {...pageProps} />)}
-
+      <VmInitializer />
       <Toaster />
     </>
   );

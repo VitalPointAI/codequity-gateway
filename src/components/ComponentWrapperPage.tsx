@@ -18,14 +18,18 @@ const Wrapper = styled.div`
   padding: 1rem;
 `;
 
+
+
 export function ComponentWrapperPage(props: Props) {
+  console.log('props herei', props)
+
   return (
     <>
       {props.meta && <MetaTags {...props.meta} />}
-
       <Wrapper>
         <VmComponent src={props.src} props={props.componentProps} />
       </Wrapper>
+      
     </>
   );
 }

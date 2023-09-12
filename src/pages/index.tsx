@@ -5,7 +5,8 @@ import { ComponentWrapperPage } from '@/components/ComponentWrapperPage';
 
 const HomePage: NextPageWithLayout = () => {
   const components = useBosComponents();
-  return <ComponentWrapperPage src={components.home} />;
+  console.log('components', components)
+  return <ComponentWrapperPage src={components.home}/>
 };
 
 HomePage.getLayout = useDefaultLayout;
